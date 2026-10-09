@@ -1,0 +1,178 @@
+<!-- app/static/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinePrint — Terms of Service Analysis</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="monogram">FP</div>
+      <div>FinePrint</div>
+      <div class="pill">Explainable NLP · Academic MVP</div>
+    </div>
+    <nav>
+      <a href="#" class="active" id="nav-analyse">Analyse</a>
+      <a href="#" id="nav-compare">Compare</a>
+      <a href="#" id="nav-audit">Model audit</a>
+      <a href="https://github.com/shivam-core/FinePrint" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div id="view-analyse">
+      <div class="hero">
+        <h1>Know what you're agreeing to.</h1>
+        <p>Inspect terms, trace the model's reasoning, and export your findings.</p>
+        <div class="subtext">Educational screening tool. Unflagged text is not a guarantee of fairness.</div>
+      </div>
+
+      <div class="card" id="input-card">
+        <div class="tabs">
+          <button class="tab active" data-target="paste">Paste text</button>
+          <button class="tab" data-target="upload">Upload document</button>
+        </div>
+        
+        <div id="paste-input" class="tab-content">
+          <textarea id="text-input" placeholder="Paste terms of service here..."></textarea>
+        </div>
+        
+        <div id="upload-input" class="tab-content hidden">
+          <div class="dropzone" id="dropzone">
+            Click to upload or drag & drop<br>
+            <small>PDF, DOCX, TXT up to 5MiB</small>
+            <input type="file" id="file-input" accept=".pdf,.docx,.txt">
+          </div>
+          <div id="extraction-preview" class="hidden">
+            <div style="display:flex; justify-content:space-between; margin-bottom:8px; color:var(--muted); font-size:14px;">
+              <span id="preview-meta"></span>
+            </div>
+            <textarea id="extracted-text-input"></textarea>
+          </div>
+        </div>
+        
+        <div id="status-msg" class="hidden" style="color:var(--platinum); margin-bottom:16px;"></div>
+
+        <div class="actions">
+          <button class="primary" id="btn-analyse">Analyse terms</button>
+          <button class="secondary" id="btn-load-example">Load example</button>
+          <button class="quiet" id="btn-clear">Clear</button>
+        </div>
+      </div>
+
+      <div id="results-view" class="hidden">
+        <div class="results-heading">
+          <div>
+            <h2>Analysis Results</h2>
+            <div style="color:var(--muted); font-size:14px;" id="results-meta"></div>
+          </div>
+          <button class="primary" id="btn-download-pdf">Download PDF report</button>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="num" id="sum-total">0</div>
+            <div class="label">Total clauses</div>
+          </div>
+          <div class="summary-card">
+            <div class="num" id="sum-flagged" style="color:var(--flag)">0</div>
+            <div class="label">Potentially unfair</div>
+          </div>
+          <div class="summary-card">
+            <div class="num" id="sum-clear" style="color:var(--clear)">0</div>
+            <div class="label">No issue detected</div>
+          </div>
+          <div class="summary-card">
+            <div class="num" id="sum-review" style="color:var(--review)">0</div>
+            <div class="label">Needs review</div>
+          </div>
+        </div>
+
+        <div class="workspace">
+          <div class="reader">
+            <div class="filters">
+              <button class="filter active" data-filter="all">All</button>
+              <button class="filter" data-filter="flagged">Potentially unfair</button>
+              <button class="filter" data-filter="clear">No issue detected</button>
+              <button class="filter" data-filter="review">Needs review</button>
+            </div>
+            <div class="source-view" id="source-reader"></div>
+          </div>
+          
+          <div class="inspector card">
+            <div id="inspector-empty">Select a clause to inspect its explanation.</div>
+            <div id="inspector-content" class="hidden">
+              <div id="ins-badge" class="badge"></div>
+              <div style="color:var(--muted); font-size:13px; margin-bottom:16px;" id="ins-id"></div>
+              
+              <div id="ins-categories">
+                <!-- Dropdown if multiple, else static text -->
+              </div>
+              
+              <div class="score-row">
+                <span>Model score:</span>
+                <span id="ins-score"></span>
+              </div>
+              
+              <div class="context-box" id="ins-context"></div>
+              
+              <div id="ins-features">
+                <h4 style="margin: 0 0 12px 0; font-size:14px;">Influential phrases</h4>
+                <div id="features-list"></div>
+              </div>
+              
+              <div class="limitation">The model matched patterns learned from training data. It is an uncalibrated estimate, not a legal guarantee.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="view-compare" class="hidden">
+      <div class="hero">
+        <h1>Comparison Lab</h1>
+        <p>Compare original and edited clauses using the same model.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex; gap:16px; margin-bottom:16px;">
+          <div style="flex:1;">
+            <label style="color:var(--muted); font-size:14px;">Original</label>
+            <textarea id="comp-orig" style="height:150px; margin-top:8px;"></textarea>
+          </div>
+          <div style="flex:1;">
+            <label style="color:var(--muted); font-size:14px;">Revised</label>
+            <textarea id="comp-rev" style="height:150px; margin-top:8px;"></textarea>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="primary" id="btn-compare">Analyse comparison</button>
+          <button class="secondary" id="btn-comp-demo">Load illustrative pair</button>
+        </div>
+      </div>
+      <div id="comp-results" class="hidden" style="display:flex; gap:16px;">
+        <div class="card" style="flex:1;" id="comp-res-orig"></div>
+        <div class="card" style="flex:1;" id="comp-res-rev"></div>
+      </div>
+    </div>
+
+    <div id="view-audit" class="hidden">
+      <div class="hero">
+        <h1>Model Audit</h1>
+        <p>Academic evaluation on a held-out test set.</p>
+      </div>
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <h2 style="margin:0;">Performance Metrics</h2>
+          <button class="secondary" id="btn-download-model-card">Download Model Card PDF</button>
+        </div>
+        <pre id="audit-content" style="background:var(--surface-raised); padding:16px; border-radius:8px; overflow-x:auto; font-size:14px; border:1px solid var(--border);"></pre>
+      </div>
+    </div>
+
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
