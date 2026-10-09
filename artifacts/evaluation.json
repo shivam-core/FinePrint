@@ -1,0 +1,142 @@
+{
+  "timestamp": "2026-10-09T23:42:41.204831+00:00",
+  "micro_f1": 0.7303370786516854,
+  "macro_f1": 0.7449352782806979,
+  "per_category": [
+    {
+      "class_id": 0,
+      "precision": 0.7941176470588235,
+      "recall": 0.7297297297297297,
+      "f1": 0.7605633802816901,
+      "support": 37
+    },
+    {
+      "class_id": 1,
+      "precision": 0.75,
+      "recall": 0.7297297297297297,
+      "f1": 0.7397260273972602,
+      "support": 37
+    },
+    {
+      "class_id": 2,
+      "precision": 0.7307692307692307,
+      "recall": 0.5277777777777778,
+      "f1": 0.6129032258064516,
+      "support": 36
+    },
+    {
+      "class_id": 3,
+      "precision": 0.5,
+      "recall": 0.9166666666666666,
+      "f1": 0.6470588235294118,
+      "support": 12
+    },
+    {
+      "class_id": 4,
+      "precision": 0.72,
+      "recall": 0.782608695652174,
+      "f1": 0.75,
+      "support": 23
+    },
+    {
+      "class_id": 5,
+      "precision": 0.8461538461538461,
+      "recall": 0.9166666666666666,
+      "f1": 0.88,
+      "support": 12
+    },
+    {
+      "class_id": 6,
+      "precision": 0.8571428571428571,
+      "recall": 0.75,
+      "f1": 0.8,
+      "support": 16
+    },
+    {
+      "class_id": 7,
+      "precision": 0.8333333333333334,
+      "recall": 0.7142857142857143,
+      "f1": 0.7692307692307693,
+      "support": 7
+    }
+  ],
+  "binary": {
+    "precision": 0.847682119205298,
+    "recall": 0.7664670658682635,
+    "f1": 0.8050314465408805,
+    "baseline_f1": 0.0,
+    "confusion_matrix": [
+      [
+        1372,
+        23
+      ],
+      [
+        39,
+        128
+      ]
+    ]
+  },
+  "subgroup_audit": {
+    "median_threshold": 24.0,
+    "short": {
+      "n": 792,
+      "prevalence": 0.07323232323232323,
+      "precision": 0.8035714285714286,
+      "recall": 0.7758620689655172,
+      "f1": 0.7894736842105263,
+      "micro_f1": 0.6616541353383458,
+      "macro_f1": 0.5804222940440079
+    },
+    "long": {
+      "n": 770,
+      "prevalence": 0.14155844155844155,
+      "precision": 0.8736842105263158,
+      "recall": 0.7614678899082569,
+      "f1": 0.8137254901960784,
+      "micro_f1": 0.7713004484304933,
+      "macro_f1": 0.7532880610900019
+    }
+  },
+  "audit_finding": "Comparing 792 short clauses with 770 long clauses, the multi-label macro-F1 gap is 0.1729.",
+  "false_negatives": [
+    {
+      "text": "the licenses granted by amazon terminate if you do not comply with these conditions of use or any service terms .",
+      "true_labels": [
+        1
+      ]
+    },
+    {
+      "text": "we reserve the right to revoke the free trial and put your account on hold in the event that we determine that you are not eligible .",
+      "true_labels": [
+        1
+      ]
+    },
+    {
+      "text": "netflix regularly makes changes to the service , including the content library .",
+      "true_labels": [
+        2
+      ]
+    }
+  ],
+  "false_positives": [
+    {
+      "text": "please read carefully the following terms and conditions ( `` terms '' ) and our privacy policy , which may be found at academia.edu/privacy and which is incorporated by reference into these terms .",
+      "predicted_labels": [
+        4
+      ]
+    },
+    {
+      "text": "we may offer automatic or manual updates to the amazon software at any time and without notice to you .",
+      "predicted_labels": [
+        1,
+        2
+      ]
+    },
+    {
+      "text": "by using the services , you affirm that :",
+      "predicted_labels": [
+        4
+      ]
+    }
+  ]
+}

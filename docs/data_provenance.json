@@ -1,0 +1,8 @@
+{
+  "dataset": "LexGLUE unfair_tos",
+  "source": "https://huggingface.co/datasets/coastalcph/lex_glue",
+  "train_retained": 5427,
+  "val_retained": 2243,
+  "test_retained": 1562,
+  "deduplication": "Union labels for exact duplicates, removed overlaps in val/test."
+}

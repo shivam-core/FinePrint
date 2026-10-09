@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-10-09T23:42:22.680784+00:00",
+  "model_version": "v1.0",
+  "feature_count": 19987,
+  "thresholds": [
+    0.75,
+    0.7,
+    0.8,
+    0.65,
+    0.6,
+    0.7,
+    0.5,
+    0.7
+  ],
+  "median_length": 24.0,
+  "train_size": 5427,
+  "val_size": 2243,
+  "test_size": 1562
+}
