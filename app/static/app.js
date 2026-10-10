@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentAnalysis = null;
 
     function showStatus(msg, loading=false, color='var(--platinum)') {
+        btnAnalyse.disabled = loading;
         if (!msg) {
             statusMsg.classList.add('hidden');
             return;
@@ -104,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
         statusMsg.textContent = msg;
         statusMsg.style.color = color;
         statusMsg.classList.remove('hidden');
-        btnAnalyse.disabled = loading;
     }
 
     btnLoadExample.addEventListener('click', () => {
