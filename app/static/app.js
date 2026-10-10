@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Navigation
     const views = {
+        'nav-home': document.getElementById('view-home'),
         'nav-analyse': document.getElementById('view-analyse'),
         'nav-compare': document.getElementById('view-compare'),
         'nav-audit': document.getElementById('view-audit')
@@ -17,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (navId === 'nav-audit') loadAudit();
         });
+    });
+
+    document.getElementById('btn-start-analyzing').addEventListener('click', () => {
+        document.getElementById('nav-analyse').click();
     });
 
     // Input Tabs
